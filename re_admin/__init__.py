@@ -13,8 +13,10 @@ def main_app():
 
     app.config.from_object(Config)
     db.init_app(app)
-
+    from re_admin.db_test import check1
+    print("Before App Context")
     with app.app_context():
         db.create_all()
+        check1()
 
     return app

@@ -56,7 +56,7 @@ class Employees(db.Model):
     )
 
     def __repr__(self) -> str:
-        return f"Employee('{self.first_name}', '{self.last_name}', '{self.contact_num}', '{self.email}', )"
+        return f"Employee('{self.first_name}', '{self.last_name}', '{self.contact_num}')"
 
 
 class Types(db.Model):
@@ -84,7 +84,7 @@ class Products(db.Model):
     )
 
     def __repr__(self) -> str:
-        return f"Products('{self.product_name}', '{self.price}', '{self.quantity}', '{self.availablity}', '{self.details}', {self.product_type}' )"
+        return f"Products('{self.product_name}', '{self.price}', '{self.quantity}', '{self.is_available}', '{self.details}', {self.product_type}' )"
 
 
 class Tasks(db.Model):
@@ -96,13 +96,13 @@ class Tasks(db.Model):
     date_assigned = db.Column(db.DateTime, default=datetime.utcnow)
 
     employees_assigned = db.relationship(
-        "Employee",
+        "Employees",
         secondary=task_employee_association,
         back_populates="assigned_tasks"
     )
 
     products_required = db.relationship(
-        "Product",
+        "Products",
         secondary=task_product_association,
         back_populates="required_tasks"
     )
